@@ -5,10 +5,10 @@ import Part from "./components/part/Part";
 function App() {
   const myFetch = async (url, method, body = null, headers = {}) => {
     try {
-      if (body) {
-        body = JSON.stringify(body);
-        headers["Content-Type"] = "application/json";
-      }
+      // if (body) {
+      //   body = JSON.stringify(body);
+      //   headers["Content-Type"] = "application/json";
+      // }
 
       const response = await fetch(url, {
         method,
@@ -29,18 +29,55 @@ function App() {
   const handleSubmit = (e, url, method) => {
     e.preventDefault();
 
-    let body = {};
-    Array.from(e.target.elements)
-      .filter((i) => i.type !== "submit")
-      .forEach((e) => {
-        body[e.name] = e.value;
-      });
+    //let formData = new FormData();
+    //formData.append("firstName", "John");
+    //console.log(formData);
+    //let body = new FormData();
+    //body.append("firstName", "John");
 
-    if (method === "GET" && body.id) {
-      url += "?id=" + body.id;
+    const isFile = Array.from(e.target.elements).find((i) => i.type === "file");
+
+    let headers = {};
+    let body;
+
+    if (isFile) {
+      body = new FormData();
+      Array.from(e.target.elements)
+        .filter((i) => i.type !== "submit")
+        .forEach((e) => {
+          console.log(e.name);
+          if (e.type === "file") {
+            //  body[e.name] = e.files[0];
+            body.append(e.name, e.files[0]);
+          } else {
+            body.append(e.name, e.value);
+            //body[e.name] = e.value;
+          }
+        });
+    } else {
+      body = {};
+      Array.from(e.target.elements)
+        .filter((i) => i.type !== "submit")
+        .forEach((e) => {
+          console.log(e.name);
+          if (e.type === "file") {
+            body[e.name] = e.files[0];
+            //      body.append(e.name, e.files[0]);
+          } else {
+            //body.append(e.name, e.value);
+            body[e.name] = e.value;
+          }
+        });
+
+      if (method === "GET" && body.id) {
+        url += "?id=" + body.id;
+      } else {
+        body = JSON.stringify(body);
+        headers["Content-Type"] = "application/json";
+      }
     }
 
-    myFetch(url, method, (body = method === "GET" ? null : body));
+    myFetch(url, method, (body = method === "GET" ? null : body), headers);
   };
 
   return (
@@ -1240,6 +1277,190 @@ function App() {
             </ul>
             <div className={css.test}>
               <form onSubmit={(e) => handleSubmit(e, "/api/act", "GET")}>
+                <input type="submit" value="getAll" />
+              </form>
+            </div>
+            {/* END GET all */}
+          </ul>
+        </div>
+      </Part>
+
+      <Part name="QualityDoc">
+        <div className={css.title}>
+          <ul>
+            {/* POST */}
+            <li>/api/qualitydoc</li>
+            method:POST
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  name: string, beginDate:number,
+                  endDate:number,pageCount:number, file:file
+                </div>
+                &#125;
+              </div>
+
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      id: number, name: string, beginDate:number,
+                      endDate:number,pageCount:number, file:string
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form
+                onSubmit={(e) => handleSubmit(e, "/api/qualitydoc", "POST")}
+              >
+                <input type="text" placeholder="name" name="name" />
+                <input type="text" placeholder="beginDate" name="beginDate" />
+                <input type="text" placeholder="endDate" name="endDate" />
+                <input type="text" placeholder="pageCount" name="pageCount" />
+                <input type="file" placeholder="file" name="file" />
+
+                <input type="submit" value="Create" />
+              </form>
+            </div>
+            {/* END POST */}
+            {/* GET */}
+            <li>/api/qualitydoc</li>
+            method:GET
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                <div className={css.values}>?id: number</div>
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      id: number, name: string, beginDate:number,
+                      endDate:number,pageCount:number, file:string
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+                <div>
+                  string: <b>data</b>=&gt;"not found"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/qualitydoc", "GET")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="getById" />
+              </form>
+            </div>
+            {/* END GET */}
+            {/* DELETE */}
+            <li>/api/qualitydoc</li>
+            method:DELETE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>id: number</div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"deleted"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form
+                onSubmit={(e) => handleSubmit(e, "/api/qualitydoc", "DELETE")}
+              >
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="deleteById" />
+              </form>
+            </div>
+            {/*END DELETE */}
+            {/* PUT */}
+            <li>/api/qualitydoc</li>
+            method:UPDATE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  id: number, name?: string, beginDate?:number,
+                  endDate?:number,pageCount?:number, file?:string
+                </div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"updated"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/qualitydoc", "PUT")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="text" placeholder="name" name="name" />
+                <input type="text" placeholder="beginDate" name="beginDate" />
+                <input type="text" placeholder="endDate" name="endDate" />
+                <input type="text" placeholder="pageCount" name="pageCount" />
+                <input type="file" placeholder="file" name="file" />
+                <input type="submit" value="update" />
+              </form>
+            </div>
+            {/* END PUT */}
+            {/* GET all */}
+            <li>/api/qualitydoc</li>
+            method:GET
+            <ul>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>Array:data</b>
+                  <div className={css.object}>
+                    &#91;&#123;
+                    <div className={css.values}>
+                      id: number, name?: string, beginDate?:number,
+                      endDate?:number,pageCount?:number, file?:string
+                      dataCreated:number
+                    </div>
+                    &#125;,&#93;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/qualitydoc", "GET")}>
                 <input type="submit" value="getAll" />
               </form>
             </div>

@@ -7,7 +7,7 @@ const Project = new ClassTable();
 
 router.post("/", async (req, res) => {
   const body = req.body;
-  console.log(body);
+  console.log("project", body);
   body.dataCreated = Date.now();
 
   const { error, data } = await Project.new(body);
@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
   res.send({ data });
 });
 
-router.delete("/", verification, async (req, res) => {
+router.delete("/", async (req, res) => {
   const body = req.body;
 
   const { data, error } = await Project.deleteById(body.id);

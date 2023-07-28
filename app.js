@@ -32,6 +32,7 @@ app.use("/api/workArea", require("./routes/workArea.router"));
 app.use("/api/workStage", require("./routes/workStage.router"));
 app.use("/api/material", require("./routes/material.router"));
 app.use("/api/act", require("./routes/act.router"));
+app.use("/api/qualitydoc", require("./routes/qualityDoc.router"));
 
 const CreateTable = require("./models/createTables").CreateTable;
 

@@ -67,6 +67,17 @@ class CreateTable {
         dataCreated   INTEGER(20)
     );
     `,
+      ,
+      `CREATE TABLE IF NOT EXISTS qualityDocs
+        (id           INTEGER      PRIMARY KEY AUTOINCREMENT,
+        name          TEXT,
+        beginDate     INTEGER,
+        endDate       INTEGER,
+        pageCount     INTEGER,
+        File          TEXT,
+        dataCreated   INTEGER(20)
+    );
+    `,
     ];
     this._serialize(sql);
   }
