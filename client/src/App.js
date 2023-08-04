@@ -42,7 +42,7 @@ function App() {
           //console.log(e.name);
           //console.log(e.name);
           if (e.type === "file") {
-            body.append(e.name, e.files[0] || "");
+            body.append(e.name, e.files[0]);
           } else {
             body.append(e.name, e.value);
             //body[e.name] = e.value;
@@ -54,7 +54,7 @@ function App() {
         .filter((i) => i.type !== "submit")
         .forEach((e) => {
           if (e.type === "file") {
-            body[e.name] = e.files[0] || "";
+            body[e.name] = e.files[0];
           } else {
             body[e.name] = e.value;
           }

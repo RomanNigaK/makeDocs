@@ -48,9 +48,14 @@ app.use(function (req, res, next) {
 
     if (!isValues) {
       const notDataFields = options.filter((i) => !!!body[i]);
-      console.log(notDataFields);
       return res.status(400).send({
         error: `required fields: ${notDataFields.join(",")}`,
+      });
+    }
+
+    if (body.file && body.file === "undefined") {
+      return res.status(400).send({
+        error: `file not selected`,
       });
     }
   }
