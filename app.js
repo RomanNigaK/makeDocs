@@ -33,6 +33,10 @@ app.use("/api/workStage", require("./routes/workStage.router"));
 app.use("/api/material", require("./routes/material.router"));
 app.use("/api/act", require("./routes/act.router"));
 app.use("/api/qualitydoc", require("./routes/qualityDoc.router"));
+app.use("/api/drawing", require("./routes/drawing.router"));
+app.use("/api/lab", require("./routes/lab.router"));
+app.use("/api/member", require("./routes/member.router"));
+app.use("/api/company", require("./routes/company.router"));
 
 const CreateTable = require("./models/createTables").CreateTable;
 

@@ -14,9 +14,8 @@ class QualityDocs extends CommonModelMethods {
       `UPDATE qualityDocs SET name = '${body.name || currentRowData.name}', 
       beginDate='${body.beginDate || currentRowData.beginDate}',
       endDate='${body.endDate || currentRowData.endDate}',
-      pageCount='${body.pageCount || currentRowData.pageCount}'  WHERE id = ${
-        body.id
-      }`,
+      pageCount='${body.pageCount || currentRowData.pageCount}',
+      File='${body.file || currentRowData.file}'  WHERE id = ${body.id}`,
       cb
     );
   }

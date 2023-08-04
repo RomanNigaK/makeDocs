@@ -1468,6 +1468,757 @@ function App() {
           </ul>
         </div>
       </Part>
+
+      <Part name="Drawing">
+        <div className={css.title}>
+          <ul>
+            {/* POST */}
+            <li>/api/drawing</li>
+            method:POST
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  name: string, number:number, date:integer, workAreas:number,
+                  workStages:number, acts:number, pageCount:number, file:file
+                </div>
+                &#125;
+              </div>
+
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      name: string, number:string, date:integer,
+                      workAreas:number, workStages:number, acts:number,
+                      pageCount:number, file:string, dataCreated:number
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/drawing", "POST")}>
+                <input type="text" placeholder="name" name="name" />
+                <input type="text" placeholder="number" name="number" />
+                <input type="text" placeholder="date" name="date" />
+                <input type="text" placeholder="workAreas" name="workAreas" />
+                <input type="text" placeholder="workStages" name="workStages" />
+                <input type="text" placeholder="acts" name="acts" />
+                <input type="text" placeholder="pageCount" name="pageCount" />
+                <input type="file" placeholder="file" name="file" />
+
+                <input type="submit" value="Create" />
+              </form>
+            </div>
+            {/* END POST */}
+            {/* GET */}
+            <li>/api/drawing</li>
+            method:GET
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                <div className={css.values}>?id: number</div>
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      id: number, name: string, number:string, date:integer,
+                      workAreas:number, workStages:number, acts:number,
+                      pageCount:number, file:string, dataCreated:number
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+                <div>
+                  string: <b>data</b>=&gt;"not found"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/drawing", "GET")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="getById" />
+              </form>
+            </div>
+            {/* END GET */}
+            {/* DELETE */}
+            <li>/api/drawing</li>
+            method:DELETE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>id: number</div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"deleted"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/drawing", "DELETE")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="deleteById" />
+              </form>
+            </div>
+            {/*END DELETE */}
+            {/* PUT */}
+            <li>/api/drawing</li>
+            method:UPDATE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  id: number, name?: string, number?:string, date?:integer,
+                  workAreas?:number, workStages?:number, acts?:number,
+                  pageCount?:number, file?:File
+                </div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"updated"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/drawing", "PUT")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="text" placeholder="name" name="name" />
+                <input type="text" placeholder="number" name="number" />
+                <input type="text" placeholder="date" name="date" />
+                <input type="text" placeholder="workAreas" name="workAreas" />
+                <input type="text" placeholder="workStages" name="workStages" />
+                <input type="text" placeholder="acts" name="acts" />
+                <input type="text" placeholder="pageCount" name="pageCount" />
+                <input type="file" placeholder="file" name="file" />
+                <input type="submit" value="update" />
+              </form>
+            </div>
+            {/* END PUT */}
+            {/* GET all */}
+            <li>/api/drawing</li>
+            method:GET
+            <ul>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>Array:data</b>
+                  <div className={css.object}>
+                    &#91;&#123;
+                    <div className={css.values}>
+                      id: number, name: string, number:string, date:integer,
+                      workAreas:number, workStages:number, acts:number,
+                      pageCount:number, file:string, dataCreated:number
+                    </div>
+                    &#125;,&#93;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/drawing", "GET")}>
+                <input type="submit" value="getAll" />
+              </form>
+            </div>
+            {/* END GET all */}
+          </ul>
+        </div>
+      </Part>
+
+      <Part name="Lab">
+        <div className={css.title}>
+          <ul>
+            {/* POST */}
+            <li>/api/lab</li>
+            method:POST
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  name: string, number:number, date:integer, workAreas:number,
+                  workStages:number, acts:number, file:file
+                </div>
+                &#125;
+              </div>
+
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      name: string, number:string, date:integer,
+                      workAreas:number, workStages:number, acts:number,
+                      file:string, dataCreated:number
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/lab", "POST")}>
+                <input type="text" placeholder="name" name="name" />
+                <input type="text" placeholder="number" name="number" />
+                <input type="text" placeholder="date" name="date" />
+                <input type="text" placeholder="workAreas" name="workAreas" />
+                <input type="text" placeholder="workStages" name="workStages" />
+                <input type="text" placeholder="acts" name="acts" />
+                <input type="file" placeholder="file" name="file" />
+
+                <input type="submit" value="Create" />
+              </form>
+            </div>
+            {/* END POST */}
+            {/* GET */}
+            <li>/api/lab</li>
+            method:GET
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                <div className={css.values}>?id: number</div>
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      id: number, name: string, number:string, date:integer,
+                      workAreas:number, workStages:number, acts:number,
+                      file:string, dataCreated:number
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+                <div>
+                  string: <b>data</b>=&gt;"not found"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/lab", "GET")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="getById" />
+              </form>
+            </div>
+            {/* END GET */}
+            {/* DELETE */}
+            <li>/api/lab</li>
+            method:DELETE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>id: number</div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"deleted"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/lab", "DELETE")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="deleteById" />
+              </form>
+            </div>
+            {/*END DELETE */}
+            {/* PUT */}
+            <li>/api/lab</li>
+            method:UPDATE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  id: number, name?: string, number?:string, date?:integer,
+                  workAreas?:number, workStages?:number, acts?:number,
+                  file?:File
+                </div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"updated"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/lab", "PUT")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="text" placeholder="name" name="name" />
+                <input type="text" placeholder="number" name="number" />
+                <input type="text" placeholder="date" name="date" />
+                <input type="text" placeholder="workAreas" name="workAreas" />
+                <input type="text" placeholder="workStages" name="workStages" />
+                <input type="text" placeholder="acts" name="acts" />
+                <input type="file" placeholder="file" name="file" />
+                <input type="submit" value="update" />
+              </form>
+            </div>
+            {/* END PUT */}
+            {/* GET all */}
+            <li>/api/lab</li>
+            method:GET
+            <ul>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>Array:data</b>
+                  <div className={css.object}>
+                    &#91;&#123;
+                    <div className={css.values}>
+                      id: number, name: string, number:string, date:integer,
+                      workAreas:number, workStages:number, acts:number,
+                      file:string, dataCreated:number
+                    </div>
+                    &#125;,&#93;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/lab", "GET")}>
+                <input type="submit" value="getAll" />
+              </form>
+            </div>
+            {/* END GET all */}
+          </ul>
+        </div>
+      </Part>
+
+      <Part name="Member">
+        <div className={css.title}>
+          <ul>
+            {/* POST */}
+            <li>/api/member</li>
+            method:POST
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  position string, fio string, orderDoc:string,sroNumber string,
+                  role string, company number,
+                </div>
+                &#125;
+              </div>
+
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      id: number, position string, fio string, sroNumber string,
+                      role string, company number, dataCreated:number
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/member", "POST")}>
+                <input type="text" placeholder="position" name="position" />
+                <input type="text" placeholder="fio" name="fio" />
+                <input type="text" placeholder="orderDoc" name="orderDoc" />
+                <input type="text" placeholder="sroNumber" name="sroNumber" />
+                <input type="text" placeholder="role" name="role" />
+                <input type="text" placeholder="company" name="company" />
+                <input type="submit" value="Create" />
+              </form>
+            </div>
+            {/* END POST */}
+            {/* GET */}
+            <li>/api/member</li>
+            method:GET
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                <div className={css.values}>?id: number</div>
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      id: number, position string, fio string, sroNumber string,
+                      role string, company number, dataCreated:number
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+                <div>
+                  string: <b>data</b>=&gt;"not found"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/member", "GET")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="getById" />
+              </form>
+            </div>
+            {/* END GET */}
+            {/* DELETE */}
+            <li>/api/member</li>
+            method:DELETE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>id: number</div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"deleted"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/member", "DELETE")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="deleteById" />
+              </form>
+            </div>
+            {/*END DELETE */}
+            {/* PUT */}
+            <li>/api/member</li>
+            method:UPDATE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  id: number, position?:string, fio?:string, sroNumber?:string,
+                  role?:string, company?:number
+                </div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"updated"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/member", "PUT")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="text" placeholder="position" name="position" />
+                <input type="text" placeholder="fio" name="fio" />
+                <input type="text" placeholder="orderDoc" name="orderDoc" />
+                <input type="text" placeholder="sroNumber" name="sroNumber" />
+                <input type="text" placeholder="role" name="role" />
+                <input type="text" placeholder="company" name="company" />
+                <input type="submit" value="update" />
+              </form>
+            </div>
+            {/* END PUT */}
+            {/* GET all */}
+            <li>/api/member</li>
+            method:GET
+            <ul>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>Array:data</b>
+                  <div className={css.object}>
+                    &#91;&#123;
+                    <div className={css.values}>
+                      id: number, position:string, fio:string, sroNumber:string,
+                      role:string, company:number dataCreated:number
+                    </div>
+                    &#125;,&#93;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/member", "GET")}>
+                <input type="submit" value="getAll" />
+              </form>
+            </div>
+            {/* END GET all */}
+          </ul>
+        </div>
+      </Part>
+
+      <Part name="Company">
+        <div className={css.title}>
+          <ul>
+            {/* POST */}
+            <li>/api/company</li>
+            method:POST
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  fullName:string, shortName:string, address:string, inn:number,
+                  ogrn:number, sroName:string, sroAddress:string, sroInn:number,
+                  sroOgrn:number, role:string
+                </div>
+                &#125;
+              </div>
+
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      id: number, fullName:string, shortName:string,
+                      address:string, inn:number, ogrn:number, sroName:string,
+                      sroAddress:string, sroInn:number, sroOgrn:number,
+                      role:string,dataCreated:number
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/company", "POST")}>
+                <input type="text" placeholder="fullName" name="fullName" />
+                <input type="text" placeholder="shortName" name="shortName" />
+                <input type="text" placeholder="address" name="address" />
+                <input type="text" placeholder="inn" name="inn" />
+                <input type="text" placeholder="ogrn" name="ogrn" />
+                <input type="text" placeholder="sroName" name="sroName" />
+                <input type="text" placeholder="sroInn" name="sroInn" />
+                <input type="text" placeholder="sroOgrn" name="sroOgrn" />
+                <input type="text" placeholder="role" name="role" />
+                <input type="submit" value="Create" />
+              </form>
+            </div>
+            {/* END POST */}
+            {/* GET */}
+            <li>/api/company</li>
+            method:GET
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                <div className={css.values}>?id: number</div>
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>data</b>
+                  <div className={css.object}>
+                    &#123;
+                    <div className={css.values}>
+                      id: number, fullName:string, shortName:string,
+                      address:string, inn:number, ogrn:number, sroName:string,
+                      sroAddress:string, sroInn:number, sroOgrn:number,
+                      role:string,dataCreated:number
+                    </div>
+                    &#125;
+                  </div>
+                </div>
+                <div>
+                  string: <b>data</b>=&gt;"not found"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/company", "GET")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="getById" />
+              </form>
+            </div>
+            {/* END GET */}
+            {/* DELETE */}
+            <li>/api/company</li>
+            method:DELETE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>id: number</div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"deleted"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/company", "DELETE")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="submit" value="deleteById" />
+              </form>
+            </div>
+            {/*END DELETE */}
+            {/* PUT */}
+            <li>/api/company</li>
+            method:UPDATE
+            <ul>
+              <li>request</li>
+              <div className={css.object}>
+                &#123;
+                <div className={css.values}>
+                  id: number, fullName?:string, shortName?:string,
+                  address?:string, inn?:number, ogrn?:number, sroName?:string,
+                  sroAddress?:string, sroInn?:number, sroOgrn?:number,
+                  role?:string
+                </div>
+                &#125;
+              </div>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+
+                <div>
+                  string: <b>data</b>=&gt;"updated"
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/company", "PUT")}>
+                <input type="text" placeholder="id" name="id" />
+                <input type="text" placeholder="fullName" name="fullName" />
+                <input type="text" placeholder="shortName" name="shortName" />
+                <input type="text" placeholder="address" name="address" />
+                <input type="text" placeholder="inn" name="inn" />
+                <input type="text" placeholder="ogrn" name="ogrn" />
+                <input type="text" placeholder="sroName" name="sroName" />
+                <input type="text" placeholder="sroInn" name="sroInn" />
+                <input type="text" placeholder="sroOgrn" name="sroOgrn" />
+                <input type="text" placeholder="role" name="role" />
+                <input type="submit" value="update" />
+              </form>
+            </div>
+            {/* END PUT */}
+            {/* GET all */}
+            <li>/api/company</li>
+            method:GET
+            <ul>
+              <li>response</li>
+              <ul>
+                <li>error</li>
+                <div>error:string</div>
+                <li>ok</li>
+                <div>
+                  object: <b>Array:data</b>
+                  <div className={css.object}>
+                    &#91;&#123;
+                    <div className={css.values}>
+                      id: number, fullName:string, shortName:string,
+                      address:string, inn:number, ogrn:number, sroName:string,
+                      sroAddress:string, sroInn:number, sroOgrn:number,
+                      role:string, dataCreated:number
+                    </div>
+                    &#125;,&#93;
+                  </div>
+                </div>
+              </ul>
+            </ul>
+            <div className={css.test}>
+              <form onSubmit={(e) => handleSubmit(e, "/api/company", "GET")}>
+                <input type="submit" value="getAll" />
+              </form>
+            </div>
+            {/* END GET all */}
+          </ul>
+        </div>
+      </Part>
     </div>
   );
 }

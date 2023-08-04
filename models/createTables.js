@@ -67,7 +67,6 @@ class CreateTable {
         dataCreated   INTEGER(20)
     );
     `,
-      ,
       `CREATE TABLE IF NOT EXISTS qualityDocs
         (id           INTEGER      PRIMARY KEY AUTOINCREMENT,
         name          TEXT,
@@ -75,6 +74,58 @@ class CreateTable {
         endDate       INTEGER,
         pageCount     INTEGER,
         File          TEXT,
+        dataCreated   INTEGER(20)
+    );
+    `,
+      `CREATE TABLE IF NOT EXISTS drawings
+        (id           INTEGER      PRIMARY KEY AUTOINCREMENT,
+        name          TEXT,
+        number        TEXT,
+        date          INTEGER,
+        workAreas     INTEGER,
+        workStages    INTEGER,
+        acts          INTEGER,
+        pageCount     INTEGER,
+        File          TEXT,
+        dataCreated   INTEGER(20)
+    );
+    `,
+      `CREATE TABLE IF NOT EXISTS labs
+        (id           INTEGER      PRIMARY KEY AUTOINCREMENT,
+        name          TEXT,
+        number        TEXT,
+        date          INTEGER,
+        workAreas     INTEGER,
+        workStages    INTEGER,
+        acts          INTEGER,
+        File          TEXT,
+        dataCreated   INTEGER(20)
+    );
+    `,
+      `CREATE TABLE IF NOT EXISTS members
+        (id           INTEGER      PRIMARY KEY AUTOINCREMENT,
+        position      TEXT,
+        fio           TEXT,
+        orderDoc      TEXT,
+        sroNumber     TEXT,
+        role          TEXT,
+        company       INTEGER,
+        dataCreated   INTEGER(20) 
+    );
+    `,
+      ,
+      `CREATE TABLE IF NOT EXISTS companies
+        (id           INTEGER      PRIMARY KEY AUTOINCREMENT,
+        fullName      TEXT,
+        shortName     TEXT,
+        address       TEXT,
+        inn           INTEGER,
+        ogrn          INTEGER,
+        sroName       TEXT,
+        sroAddress    TEXT,
+        sroInn        INTEGER,
+        sroOgrn       INTEGER,
+        role          TEXT,  
         dataCreated   INTEGER(20)
     );
     `,
