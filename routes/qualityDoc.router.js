@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const file = require("../middleware/uploadFile");
+
 const ClassTable = require("../models/qualityDoc").QualityDocs;
 
 const router = Router();
 
 const QualityDocs = new ClassTable();
 
-router.post("/", file.single("file"), async (req, res) => {
+router.post("/", async (req, res) => {
   const body = req.body;
 
   if (req.errorFile) return res.status(400).send({ error: req.errorFile });
@@ -49,7 +49,7 @@ router.delete("/", async (req, res) => {
   res.send({ data });
 });
 
-router.put("/", file.single("file"), async (req, res) => {
+router.put("/", async (req, res) => {
   const body = req.body;
 
   const { data, error } = await QualityDocs.findById(body.id);

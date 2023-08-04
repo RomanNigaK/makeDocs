@@ -5,6 +5,7 @@ const fs = require("fs");
 const PORT = config.get("port") || 5000;
 const http = require("http");
 const app = express();
+const BodyParser = require("body-parser");
 
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database(config.dbName);
@@ -24,6 +25,71 @@ app.use(headerServer);
 const httpServer = http.createServer(app);
 
 app.use(express.json({ extended: true }));
+app.use(BodyParser.urlencoded({ extended: false }));
+
+app.use(require("./middleware/uploadFile").single("file"));
+
+app.use(function (req, res, next) {
+  const body =
+    Object.entries(req.body).length > 0
+      ? req.body
+      : Object.entries(req.query).length > 0
+      ? req.query
+      : null;
+
+  if (!body) return next();
+
+  const options = Object.keys(body);
+
+  if (req.method === "POST") {
+    const values = Object.values(body);
+
+    const isValues = values.every((e) => !!e);
+
+    if (!isValues) {
+      const notDataFields = options.filter((i) => !!!body[i]);
+      console.log(notDataFields);
+      return res.status(400).send({
+        error: `required fields: ${notDataFields.join(",")}`,
+      });
+    }
+  }
+
+  const arrIntegers = [
+    "id",
+    "standards",
+    "qualityDocs",
+    "workStages",
+    "workAreas",
+    "date",
+    "inn",
+    "ogrn",
+    "sroInn",
+    "sroOgrn",
+    "pageCount",
+    "beginDate",
+    "endDate",
+    "acts",
+    "company",
+  ];
+
+  let arrErrorProperty = [];
+  options.forEach((e) => {
+    if (arrIntegers.includes(e)) {
+      if (!Number.isInteger(Number(body[e])))
+        arrErrorProperty.push(`${e.toLocaleUpperCase()}`);
+    }
+  });
+
+  if (arrErrorProperty.length > 0)
+    return res.status(400).send({
+      error: `Error valid ${arrErrorProperty.join(
+        ","
+      )} the ${arrErrorProperty.join(",")} must be an integer type!`,
+    });
+
+  next();
+});
 
 app.use("/api/project", require("./routes/project.router"));
 app.use("/api/design", require("./routes/design.router"));

@@ -29,12 +29,6 @@ function App() {
   const handleSubmit = (e, url, method) => {
     e.preventDefault();
 
-    //let formData = new FormData();
-    //formData.append("firstName", "John");
-    //console.log(formData);
-    //let body = new FormData();
-    //body.append("firstName", "John");
-
     const isFile = Array.from(e.target.elements).find((i) => i.type === "file");
 
     let headers = {};
@@ -45,10 +39,10 @@ function App() {
       Array.from(e.target.elements)
         .filter((i) => i.type !== "submit")
         .forEach((e) => {
-          console.log(e.name);
+          //console.log(e.name);
+          //console.log(e.name);
           if (e.type === "file") {
-            //  body[e.name] = e.files[0];
-            body.append(e.name, e.files[0]);
+            body.append(e.name, e.files[0] || "");
           } else {
             body.append(e.name, e.value);
             //body[e.name] = e.value;
@@ -59,12 +53,9 @@ function App() {
       Array.from(e.target.elements)
         .filter((i) => i.type !== "submit")
         .forEach((e) => {
-          console.log(e.name);
           if (e.type === "file") {
-            body[e.name] = e.files[0];
-            //      body.append(e.name, e.files[0]);
+            body[e.name] = e.files[0] || "";
           } else {
-            //body.append(e.name, e.value);
             body[e.name] = e.value;
           }
         });
@@ -1669,7 +1660,7 @@ function App() {
               <div className={css.object}>
                 &#123;
                 <div className={css.values}>
-                  name: string, number:number, date:integer, workAreas:number,
+                  name: string, number:string, date:integer, workAreas:number,
                   workStages:number, acts:number, file:file
                 </div>
                 &#125;

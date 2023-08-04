@@ -1,13 +1,15 @@
 const { Router } = require("express");
-const file = require("../middleware/uploadFile");
+
 const ClassTable = require("../models/drawing").Drawings;
 
 const router = Router();
 
 const Drawings = new ClassTable();
 
-router.post("/", file.single("file"), async (req, res) => {
+router.post("/", async (req, res) => {
   const body = req.body;
+
+  console.log(body);
 
   if (req.errorFile) return res.status(400).send({ error: req.errorFile });
   body.dataCreated = Date.now();
@@ -49,7 +51,7 @@ router.delete("/", async (req, res) => {
   res.send({ data });
 });
 
-router.put("/", file.single("file"), async (req, res) => {
+router.put("/", async (req, res) => {
   const body = req.body;
 
   const { data, error } = await Drawings.findById(body.id);
